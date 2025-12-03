@@ -189,10 +189,10 @@ app.patch("/update/:id", async (req, res) => {
 
 });
 
-app.delete("/delete", async (req, res) => {
+app.delete("/delete/:id", async (req, res) => {
     // gets an http containing
     // - id: id of the book to delete
-    const id = req.query.id
+    const id = req.params.id
 
     await deleteRecord(res, id)
 });
