@@ -1,0 +1,28 @@
+{
+  "name": "backend---note-books",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000-\u0000-\u0000-\u0000B\u0000o\u0000o\u0000k\u0000-\u0000N\u0000o\u0000t\u0000e\u0000s\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noam-Sasson/backend---Book-Notes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Noam-Sasson/backend---Book-Notes/issues"
+  },
+  "homepage": "https://github.com/Noam-Sasson/backend---Book-Notes#readme",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "body-parser": "^2.2.1",
+    "express": "^5.2.1",
+    "pg": "^8.16.3"
+  }
+}
