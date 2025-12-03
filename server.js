@@ -170,7 +170,7 @@ app.post("/add", async (req, res) => {
     await addNewRecord(res, title, note, rating, readDate)
 });
 
-app.patch("/update", async (req, res) => {
+app.patch("/update/:id", async (req, res) => {
     // gets an http containing
     // - id: id of the book to update
     // - title (optional): new title of the book
@@ -178,7 +178,7 @@ app.patch("/update", async (req, res) => {
     // - rating (optional): new rating
     // - date (optional): new read date
 
-    const id = req.query.id
+    const id = req.params.id
     const title = req.query.title
     const note = req.query.note
     const rating = req.query.rating
