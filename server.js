@@ -128,7 +128,21 @@ async function patchExistingRecord(res, id, title=null, note =null, rating = nul
     }
 }
 
-
+async function deleteRecord(res, id){
+    try{
+        const result =  await db.query(`DELETE FROM bookList \
+                                WHERE id = $1 RETURNING *`, [id]);
+        console.log(`Record with id ${id} deleted successfully`);
+        res.json({deletedRecord: result.rows[0]})
+    }catch(error){
+        console.log(`Failed to delete record, details: ${error}`);
+        res.status(500).json({
+            error: "Failed to delete record",
+            details: error.message,
+            id: -1
+        });
+    }
+}
 
 app.get("/top", async (req, res) => {
     //gets an http containing
@@ -154,7 +168,7 @@ app.post("/add", async (req, res) => {
     const readDate = req.query.date
 
     await addNewRecord(res, title, note, rating, readDate)
-})
+});
 
 app.patch("/update", async (req, res) => {
     // gets an http containing
@@ -173,7 +187,15 @@ app.patch("/update", async (req, res) => {
     await patchExistingRecord(res, id, title, note, rating, readDate)
     // res.status(500)
 
-})
+});
+
+app.delete("/delete", async (req, res) => {
+    // gets an http containing
+    // - id: id of the book to delete
+    const id = req.query.id
+
+    await deleteRecord(res, id)
+});
 
 app.listen(PORT, () => {
   console.log(`Successfully started server on port ${PORT}.`);
