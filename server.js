@@ -4,7 +4,7 @@ import pg from "pg";
 import fs from "fs";
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 const DB_PORT = 5432
 
