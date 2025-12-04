@@ -20,15 +20,17 @@ const db = new pg.Client({
 
 db.connect();
 
-async function getTopNRecords(res, limit, sortByCol = "id"){
+async function getTopNRecords(res, limit=null, sortByCol = "id", like = null){
+    like = like ? ` WHERE title ILIKE '%${like}%' OR note ILIKE '%${like}%'`: ''
+
     try{
         const books =  limit ? await db.query(`SELECT * \
-                                FROM bookList\
+                                FROM bookList` + like + `\
                                 ORDER BY ${sortByCol}\
                                 LIMIT $1`,[limit])
                                 :
                                 await db.query(`SELECT * \
-                                FROM bookList\
+                                FROM bookList` + like + `\
                                 ORDER BY ${sortByCol}\
                                 LIMIT ALL`)
         
@@ -151,8 +153,9 @@ app.get("/top", async (req, res) => {
 
     const limit =req.query.limit
     const sortByCol = req.query.orderBy
+    const like = req.query.like
     console.log("processing")
-    await getTopNRecords(res, limit, sortByCol)
+    await getTopNRecords(res, limit, sortByCol, like)
 });
 
 app.post("/add", async (req, res) => {
